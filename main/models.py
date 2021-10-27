@@ -17,7 +17,7 @@ class Shop(models.Model):
 
 
 class Street(models.Model):
-    street_name = models.CharField(max_length=70, verbose_name='Город')
+    street_name = models.CharField(max_length=70, verbose_name='Улица')
     shops = models.ForeignKey(Shop, on_delete=models.PROTECT, null=True, verbose_name="Магазины", related_name='street')
 
     def __str__(self):
