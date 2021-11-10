@@ -17,4 +17,3 @@ class CitySerializers(ModelSerializer):
     class Meta:
         model = City
         fields = ['city_name','streets']
-

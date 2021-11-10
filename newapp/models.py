@@ -1,4 +1,3 @@
-import os
 from django.db import models
 
 class Shop(models.Model):
@@ -6,8 +5,10 @@ class Shop(models.Model):
     house_number = models.PositiveSmallIntegerField(verbose_name='Дом')
     openTime = models.TimeField(verbose_name='Время открытия',max_length=10)
     closeTime = models.TimeField(verbose_name='Время закрытия',max_length=10)
+    street = models.ForeignKey("Street", on_delete=models.PROTECT, null=True, verbose_name="Магазины", related_name='shops', blank=True)
 
-    def __str__(self):
+
+    def str(self):
         return self.name
 
     class Meta:
@@ -18,9 +19,9 @@ class Shop(models.Model):
 
 class Street(models.Model):
     street_name = models.CharField(max_length=70, verbose_name='Улица')
-    shops = models.ForeignKey(Shop, on_delete=models.PROTECT, null=True, verbose_name="Магазины", related_name='street')
+    city= models.ForeignKey("City", on_delete=models.PROTECT, null=True, verbose_name="Город", related_name='streets')
 
-    def __str__(self):
+    def str(self):
         return self.street_name
 
     class Meta:
@@ -31,9 +32,8 @@ class Street(models.Model):
 
 class City(models.Model):
     city_name = models.CharField(max_length=50, verbose_name='Город')
-    streets = models.ForeignKey(Street, on_delete=models.PROTECT, null=True, verbose_name="Улицы", related_name='city')
 
-    def __str__(self):
+    def str(self):
         return self.city_name
 
     class Meta:
